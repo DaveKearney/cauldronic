@@ -19,12 +19,12 @@
 </head>
 <body>
     <canvas id="gameCanvas"></canvas>
-    <div id="install-modal" style="display: none;">
+    <div id="install-modal" style="display: none;" class="modal">
         <div class="modal-content">
             <h2>Install App</h2>
-            <p>Would you like to install this app on your device?</p>
-            <button id="install-button">Install</button>
-            <button id="cancel-button">Cancel</button>
+            <p id="install-message">Would you like to install this app on your device?</p>
+            <button id="install-button" style="display: none;">Install</button>
+            <button id="close-button">Close</button>
         </div>
     </div>
     <script type="module">
@@ -47,28 +47,44 @@
     <script>
         let deferredPrompt;
 
+        function checkInstallable() {
+            document.getElementById('install-modal').style.display = 'block';
+            if (deferredPrompt) {
+                document.getElementById('install-button').style.display = 'block';
+                document.getElementById('install-message').innerText = "Would you like to install this app on your device?";
+            } else {
+                document.getElementById('install-button').style.display = 'none';
+                document.getElementById('install-message').innerText = "This app is not suitable for installation.";
+            }
+        }
+
         window.addEventListener('beforeinstallprompt', (e) => {
             e.preventDefault();
             deferredPrompt = e;
-            document.getElementById('install-modal').style.display = 'block';
+            checkInstallable();
         });
 
         document.getElementById('install-button').addEventListener('click', () => {
             document.getElementById('install-modal').style.display = 'none';
-            deferredPrompt.prompt();
-            deferredPrompt.userChoice.then((choiceResult) => {
-                if (choiceResult.outcome === 'accepted') {
-                    console.log('User accepted the A2HS prompt');
-                } else {
-                    console.log('User dismissed the A2HS prompt');
-                }
-                deferredPrompt = null;
-            });
+            if (deferredPrompt) {
+                deferredPrompt.prompt();
+                deferredPrompt.userChoice.then((choiceResult) => {
+                    if (choiceResult.outcome === 'accepted') {
+                        console.log('User accepted the A2HS prompt');
+                    } else {
+                        console.log('User dismissed the A2HS prompt');
+                    }
+                    deferredPrompt = null;
+                });
+            }
         });
 
-        document.getElementById('cancel-button').addEventListener('click', () => {
+        document.getElementById('close-button').addEventListener('click', () => {
             document.getElementById('install-modal').style.display = 'none';
         });
+
+        // Check if the app is installable on load
+        checkInstallable();
     </script>
 </body>
 </html>
