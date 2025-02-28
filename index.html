@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Sorcerer's Quest</title>
+    <link rel="stylesheet" href="css/hud.css">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background: black;
+        }
+        canvas {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="gameCanvas"></canvas>
+    <script type="module">
+        import { Game } from './js/game.js';
+        window.addEventListener('DOMContentLoaded', () => {
+            window.game = new Game();
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,76 @@
+:root {
+    --hud-bg: rgba(0, 0, 0, 0.8);
+    --hud-text: #fff;
+    --hud-border: #4a4a4a;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    background: #2c3e50;
+    font-family: 'Arial', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    color: var(--hud-text);
+}
+
+.game-container {
+    position: relative;
+    width: 1024px;
+    height: 768px;
+}
+
+canvas {
+    background: #34495e;
+    border: 2px solid #4a4a4a;
+}
+
+.hud {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.player-stats {
+    background: var(--hud-bg);
+    padding: 15px;
+    border-radius: 5px;
+    border: 1px solid var(--hud-border);
+    font-size: 1.2em;
+}
+
+.player-stats > div {
+    margin: 5px 0;
+}
+
+.combat-log {
+    background: var(--hud-bg);
+    padding: 15px;
+    border-radius: 5px;
+    border: 1px solid var(--hud-border);
+    width: 250px;
+    height: 200px;
+    overflow-y: auto;
+}
+
+.combat-log h3 {
+    margin: 0 0 10px 0;
+    border-bottom: 1px solid var(--hud-border);
+    padding-bottom: 5px;
+}
+
+.log-content {
+    font-size: 0.9em;
+    line-height: 1.4;
+}
+
+.log-content p {
+    margin: 5px 0;
+    padding: 3px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
