@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Sorcerer's Quest</title>
+    <title>Cauldronic</title>
     <link rel="stylesheet" href="css/hud.css">
+    <link rel="manifest" href="manifest.json">
     <style>
         body {
             margin: 0;
@@ -22,6 +23,17 @@
         window.addEventListener('DOMContentLoaded', () => {
             window.game = new Game();
         });
+    </script>
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', function() {
+                navigator.serviceWorker.register('service-worker.js').then(function(registration) {
+                    console.log('ServiceWorker registration successful with scope: ', registration.scope);
+                }, function(err) {
+                    console.log('ServiceWorker registration failed: ', err);
+                });
+            });
+        }
     </script>
 </body>
 </html>
